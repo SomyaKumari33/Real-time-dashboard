@@ -1,0 +1,91 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" 
+ xmlns:form="sap.ui.layout.form" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data"
+ xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" 
+ controllerName="company.custom.plugins.currentPlugin.currentPlugin.controller.MainView" width="100%" height="100%"
+ xmlns:svm="sap.ui.comp.smartvariants"
+ xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:m="sap.viz.ui5.controls"
+ xmlns:chart="sap.viz.ui5.controls"
+ xmlns:dhe="sap.ui.comp.filterbar">
+		
+    <Panel 
+        id="panelPlugin"  
+        width="100%"
+        height="100%"
+        expandable="false"
+        expanded="false"
+        accessibleRole="Region"
+        backgroundDesign="Transparent"
+        class="sapUiNoContentPadding">  
+        <headerToolbar>
+            <Toolbar height="3rem">
+                <Button
+                    id="backButton"
+                    visible="false"
+                    text="{i18n>template.back.btn}"
+                    tooltip="{i18n>template.back.tooltip}"
+                    icon="sap-icon://nav-back"
+                    press="onBackPress"/>
+                <Title id="headerTitle" text=""/>
+                <ToolbarSpacer/>
+                <Button
+                    id="closeButton"
+                    visible="false"
+                    tooltip="{i18n>template.close.tooltip}"
+                    icon="sap-icon://decline"
+                    press="onClosePress"/>
+            </Toolbar>
+        </headerToolbar>
+        <content> 
+            <Text id="textPlugin" text="template" class="textFontSize" textAlign="Center" width="100%"/>
+            <HBox id="tileContainer" class="sapUiTinyMarginBegin sapUiTinyMarginTop" items="{data>/}">
+           <FlexBox id="_IDGenFlexBox1M" justifyContent="Center" class="sapUiSmallMargin">
+    <items>
+       
+    </items>  <GenericTile 
+                            header="{data>resource}" 
+                            subheader="{data>status}" 
+                            class="${data>status} === 'ENABLED' ? 'tileGreen' : ${data>status} === 'PRODUCTIVE' ? 'tileRed' : '' }" 
+                            press="onPress" 
+                            frameType="OneByOne">
+                            <TileContent>
+                            <ObjectStatus text="{data>status}" icon="sap-icon://sys-enter-2" state="{path: 'data>status', formatter: '.statusColorFormatter'}" />
+
+                                <ImageContent src="test-resources/sap/m/demokit/sample/GenericTileAsLaunchTile/images/SAPLogoLargeTile_28px_height.png" />
+                            </TileContent>
+                        </GenericTile>
+    </FlexBox>
+</HBox>
+            <f:DynamicPage id="_IDGenDynamicPage1" headerExpanded="{/headerExpanded}">
+                <f:content>
+                    <VBox id="_IDGenVBox1">
+                        <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" visible="true" width="100%" vizType="stacked_column">
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset id="_IDGenFlattenedDataset1" data="{data>/}">
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition id="_IDGenDimensionDefinition1" name="Time" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout10" value="{data>resource}" />
+                                    </viz.data:dimensions>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition id="_IDGenMeasureDefinitmion1" name="target" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout10" value="{data>efficiency}" />
+                                    </viz.data:measures>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition id="_IDGenMeasureDefinitiomn1" name="upperTolerance" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout10" value="{data>efficiency}" />
+                                    </viz.data:measures>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition id="_IDGenMeasureDefinimtion1" name="lowerTolerance" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout10" value="{data>efficiency}" />
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+                            <viz:feeds>
+                                <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout10" values="upperTolerance,target,lowerTolerance" />
+                                <viz.feeds:FeedItem id="_IDGenFeedItem1" uid="categoryAxis" type="Dimension" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout10" values="Time" />
+                            </viz:feeds>
+                            <viz:dependents>
+                                <viz:Popover id="idPopOver"></viz:Popover>
+                            </viz:dependents>
+                        </viz:VizFrame>
+                    </VBox>
+                </f:content>
+            </f:DynamicPage>
+        </content>
+    </Panel>
+</mvc:View>

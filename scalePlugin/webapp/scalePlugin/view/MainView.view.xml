@@ -1,0 +1,182 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" 
+
+          xmlns:f="sap.f" 	xmlns:form="sap.ui.layout.form"
+          
+ xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="company.custom.plugins.scalePlugin.scalePlugin.controller.MainView" 
+  xmlns:fb="sap.ui.comp.filterbar"
+          xmlns:svm="sap.ui.comp.smartvariants" width="100%" height="100%">
+		
+        <Panel 
+                id="panelPlugin"  
+                width="100%"
+                height="100%"
+                expandable="false"
+                expanded="false"
+                accessibleRole="Region"
+                backgroundDesign="Transparent"
+                class="sapUiNoContentPadding">  
+        <headerToolbar>
+            <Toolbar height="3rem">
+                <Button
+                    id="backButton"
+                    visible="false"
+                    text="{i18n>template.back.btn}"
+                    tooltip="{i18n>template.back.tooltip}"
+                    icon="sap-icon://nav-back"
+                    press="onBackPress"/>
+                <Title id="headerTitle" text=""/>
+                <ToolbarSpacer/>
+                <Button
+                    id="closeButton"
+                    visible="false"
+                    tooltip="{i18n>template.close.tooltip}"
+                    icon="sap-icon://decline"
+                    press="onClosePress"/>
+            </Toolbar>
+        </headerToolbar>
+        <content> 
+            <Text id="textPlugin" text="template" class="textFontSize" textAlign="Center" width="100%"/>
+          <f:DynamicPage id="_IDGenDynammicPage1n" headerExpanded="{/headerExpanded}">
+                <f:title>
+                    <f:DynamicPageTitle id="_IDGenDynamicPageTitle1mn"/>
+                </f:title>
+                <f:header>
+                    <f:DynamicPageHeader id="_IDGenDynanmicPmageHeader1">
+                        <f:content>
+                            <VBox>
+                                <fb:FilterBar id="filternbars" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                                    <fb:filterGroupItems>
+
+                                        <!-- Resource Filter - Using Value Help -->
+                                        <fb:FilterGroupItem id="filterResource" name="resource" mandatory="true" label="Resource" groupName="Group1" visibleInFilterBar="true">
+                                            <fb:control>
+                                                <Input id="resourceInput"
+                                                       showValueHelp="true"
+                                                       valueHelpRequest=".onValueHelpRequest"
+                                                       placeholder="Select Resource"/>
+                                            </fb:control>
+                                        </fb:FilterGroupItem>
+
+                                        <!-- Work Center Filter - Using Value Help -->
+                                        <fb:FilterGroupItem id="filterWorkCenter" name="description" mandatory="true" label="Work Center" groupName="Group1" visibleInFilterBar="true">
+                                            <fb:control>
+                                                <Input id="workCenterInput"
+                                                       showValueHelp="true"
+                                                       valueHelpRequest=".onWorkCenterValueHelpRequest"
+                                                       placeholder="Select Work Center"/>
+                                            </fb:control>
+                                        </fb:FilterGroupItem>
+
+                                    </fb:filterGroupItems>
+
+                                    <fb:filterItems>
+                                        <!-- <fb:FilterItem id="filterDateRange" name="Planned Start Date Range" label="Planned Start Date Range" mandatory="true">
+                                            <fb:control>
+                                                <DateRangeSelection id="dateRange"/>
+                                            </fb:control>
+                                        </fb:FilterItem> -->
+                                    </fb:filterItems>
+                                </fb:FilterBar>
+                            </VBox>
+                        </f:content>
+                    </f:DynamicPageHeader>
+                </f:header>
+
+                <f:content>
+                    <Table id="table"
+                           width="100%"
+                           growing="true"
+                           growingScrollToLoad="true"
+                           growingThreshold="10"
+                           inset="false">
+                        <headerToolbar>
+                        <Toolbar >
+                            <ToolbarSpacer />
+                            <Button id="clearButton" text="Clear" press=".onClearPress"/>
+                        </Toolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column id="_IDGenColumn1" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText1" text="Order"/>
+                            </Column>
+                            
+                            <Column id="_IDGenColumn2i7" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText2i7" text="Status"/>
+                            </Column>
+                            <Column id="_IDGenColumn2" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText2" text="Material"/>
+                            </Column>
+                            <Column id="_IDGenColumn3" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText3" text="Material Description"/>
+                            </Column>
+                            <Column id="_IDGenColumn4" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText4" text="Batch Number"/>
+                            </Column>
+                            <Column id="_IDGenColumn5" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText5" text="Resource"/>
+                            </Column>
+                            <Column id="_IDGenColumn6" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText6" text="Work Center"/>
+                            </Column>
+                            
+                            <Column id="_IDGenColumn80" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText80" text="User Id"/>
+                            </Column>
+                            <Column id="_IDGenColumn8" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText8" text="Order Start Date"/>
+                            </Column>
+                            <Column id="_IDGenColumn9" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText9" text="Order End Date"/>
+                            </Column>
+                            <Column id="_IDGenColumn90" minScreenWidth="Tablet" demandPopin="true">
+                                <Text id="_IDGenText90" text="Consumption Time and Date"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="idTableListItem">
+                                <Text text="{data>resource}" />
+                                <ObjectStatus text="{data>status}" icon="sap-icon://grid" state="{path: 'data>status', formatter: '.statusColorFormatter'}" />
+                                <Text text="{data>resource}" />
+                                <Text text="{data>description}" />
+                                <Text text="{data>resource}" />
+                                <Text text="{data>batchNumber}" />
+                                <Text text="" />
+                                <Text text="" />
+                                <Text text="{data>resource}" />
+                                <Text text="" />
+                                <Text text="{data>plannedStartDate}" />
+                                <Text text="{data>plannedCompletionDate}" />
+                                <Text text="" />
+                               <!-- ObjectStatus to show status with color -->
+                        
+                                
+                            </ColumnListItem>
+                        </items>
+                        <dependents>
+                            <ColumnListItem id="idTableListItem2">
+                                <Text text="{data>resource}" />
+                                <ObjectStatus text="{data>status}" icon="sap-icon://grid" state="{path: 'data>status', formatter: '.statusColorFormatter'}" />
+                                <Text text="{data>resource}" />
+                                <Text text="{data>description}" />
+                                <Text text="{data>resource}" />
+                                <Text text="{data>batchNumber}" />
+                                <Text text="" />
+                                <Text text="" />
+                                <Text text="{data>resource}" />
+                                <Text text="" />
+                                <Text text="{data>plannedStartDate}" />
+                                <Text text="{data>plannedCompletionDate}" />
+                                <Text text="" />
+                               <!-- ObjectStatus to show status with color -->
+                        
+                                
+                            </ColumnListItem>
+                        </dependents>
+                    </Table>
+                </f:content>
+            </f:DynamicPage>
+        </content>
+	    </Panel>		
+        
+  
+</mvc:View>

@@ -1,0 +1,15 @@
+{
+	"components": [
+		{
+			"id": "scalePlugin",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": false,
+			"name": "company.custom.plugins.scalePlugin.scalePlugin",
+			"propertyEditor": "company.custom.plugins.scalePlugin.scalePlugin.builder.PropertyEditor",
+			"i18n": "company.custom.plugins.scalePlugin.scalePlugin.i18n.i18n",
+            "productionProcessEnabled": true,
+           "productionProcessTitle": "scalePlugin",
+			"supportedPodTypes": ["WORK_CENTER","OPERATION","ORDER"]
+		}   
+	]
+}
